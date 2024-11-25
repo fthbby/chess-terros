@@ -1,7 +1,9 @@
 import React from "react";
-import { Box, Text, FlatList } from "native-base";
+import { Box, FlatList } from "native-base";
 import Tower from "../components/Pieces/Tower";
 import Pawn from "../components/Pieces/Pawn";
+import Horses from "../components/Pieces/Horses";
+import Bishop from "../components/Pieces/Bishop";
 
 function Chessboard({ player }) {
   const data = [];
@@ -19,6 +21,14 @@ function Chessboard({ player }) {
 
     if (index === 0 || index === 7 || index === 56 || index === 63) {
       return <Tower color={index < 32 ? "black" : "white"} />;
+    }
+
+    if (index === 1 || index === 6 || index === 57 || index === 62) {
+      return <Horses color={index < 32 ? "black" : "white"} />;
+    }
+
+    if (index === 2 || index === 5 || index === 58 || index === 61) {
+      return <Bishop color={index < 32 ? "black" : "white"} />;
     }
     return null;
   };
