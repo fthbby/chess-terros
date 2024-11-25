@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Text, FlatList } from "native-base";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 function Chessboard() {
   const data = [];
@@ -11,13 +12,13 @@ function Chessboard() {
     (Math.floor(index / 8) + (index % 8)) % 2 === 0 ? "#172F44" : "#FCBB00"
 
   return (
-    <Box>
+    <Box alignItems={'center'} justifyContent={'center'}>
       <FlatList
         numColumns={8}
         data={data}
         renderItem={({ item }) => (
           <Box backgroundColor={color(item)} width={10} height={10}>
-            {item}
+            {/* {item} */}
           </Box>
         )}
       />
