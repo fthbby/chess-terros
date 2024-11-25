@@ -28,7 +28,7 @@ export default function Index() {
           <View alignItems="center" justifyContent="center">
 
           <TouchableOpacity onPress={switchUser}>
-            <Chessboard />
+            <Chessboard player={player}/>
           </TouchableOpacity>
           </View>
         </View>
