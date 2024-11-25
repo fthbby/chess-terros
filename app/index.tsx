@@ -12,7 +12,7 @@ export default function Index() {
   };
 
   useEffect(() => {
-    setPlayer(user ? "Player 1" : "Player 2");
+    setPlayer(user ? "Player 1 - White" : "Player 2 - Black");
   }, [user]);
 
   return (
@@ -24,11 +24,13 @@ export default function Index() {
           height={'100%'}
           paddingY={20}
         >
-          <Text fontSize={20} fontWeight={600} pb={5}>Current User: {player}</Text>
+          <Text fontSize={20} fontWeight={600} pb={0}>CURRENT PLAYER:</Text>
+          <Text fontSize={20} fontWeight={400} pb={5}>{player}</Text>
+
           <View alignItems="center" justifyContent="center">
 
           {/* <TouchableOpacity onPress={switchUser}> */}
-            <Chessboard player={player}/>
+            <Chessboard player={player} setPlayer={setPlayer}/>
           {/* </TouchableOpacity> */}
           </View>
         </View>

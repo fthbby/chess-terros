@@ -8,7 +8,7 @@ import Queen from "../components/Pieces/Queen";
 import King from "../components/Pieces/King";
 import { TouchableOpacity } from "react-native";
 
-function Chessboard({ player }) {
+function Chessboard({ player, setPlayer }) {
   const data = [];
   for (let i = 0; i < 64; i++) {
     data.push(i);
