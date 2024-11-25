@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 
 export default function Index() {
-  const [currentPlayer, setCurrentPlayer] = useState(true);
+  const [currentPlayer, setCurrentPlayer] = useState("white");
 
   const switchUser = () => {
-    setCurrentPlayer((prevUser) => !prevUser);
+    setCurrentPlayer((prevUser) => (prevUser === "white" ? "black" : "white"));
   };
 
   return (
@@ -19,13 +19,10 @@ export default function Index() {
         height={"100%"}
         paddingY={20}
       >
-        <Text fontSize={20} fontWeight={600} pb={0}>
-          CURRENT PLAYER:
+        <Text fontSize={20} fontWeight={600} pb={5}>
+         It is currently player {currentPlayer}'s turn!
         </Text>
-        <Text fontSize={20} fontWeight={400} pb={5}>
-          Player {currentPlayer ? "1" : "2"} -{" "}
-          {currentPlayer ? "white" : "black"}
-        </Text>
+       
 
         <View alignItems="center" justifyContent="center">
           <TouchableOpacity onPress={switchUser}>

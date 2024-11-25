@@ -74,7 +74,7 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
     const piece = board[index];
     console.log("piece:", piece);
 
-    if (piece && piece.piece === "Pawn") {
+    if (piece && piece.piece === "Pawn" && piece.color === currentPlayer) {
       const direction = piece.color === "black" ? 8 : -8;
       const targetIndex = index + direction;
 
@@ -84,6 +84,8 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
         newBoard[targetIndex] = { piece: "Pawn", color: piece.color };
         newBoard[index] = null;
         setBoard(newBoard);
+
+        setCurrentPlayer(currentPlayer === "white" ? "black" : "white");
       }
     }
   };
