@@ -12,8 +12,9 @@ export default function Index() {
           alignItems: "center",
         }}
       >
-        <Chessboard />
         <Text>Edit app/issndex.tsx to edit this screen.</Text>
+
+        <Chessboard />
       </View>
     </NativeBaseProvider>
   );
