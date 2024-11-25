@@ -25,14 +25,13 @@ export default function Index() {
        
 
         <View alignItems="center" justifyContent="center">
-          <TouchableOpacity onPress={switchUser}>
+          {/* <TouchableOpacity onPress={switchUser}>
             <Text>hi</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <Chessboard
             currentPlayer={currentPlayer}
             setCurrentPlayer={setCurrentPlayer}
           />
-          {/* </TouchableOpacity> */}
         </View>
       </View>
     </NativeBaseProvider>

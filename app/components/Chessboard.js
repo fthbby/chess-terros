@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, FlatList, Text } from "native-base";
+import { Box, FlatList, Text, Button } from "native-base";
 import Tower from "../components/Pieces/Tower";
 import Pawn from "../components/Pieces/Pawn";
 import Horses from "../components/Pieces/Horses";
@@ -10,6 +10,8 @@ import { TouchableOpacity } from "react-native";
 
 function Chessboard({ currentPlayer, setCurrentPlayer }) {
   const data = [];
+  const [errorMsg, setErrorMsg] = useState(false);
+
   for (let i = 0; i < 64; i++) {
     data.push(i);
   }
@@ -87,10 +89,24 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
 
         setCurrentPlayer(currentPlayer === "white" ? "black" : "white");
       }
+      setErrorMsg(false);
+    } else if (piece) {
+      setErrorMsg(true);
+
+      console.log("NOT UR TURN");
     }
   };
   return (
     <Box alignItems={"center"} justifyContent={"center"}>
+      <Box height={20}>
+        {errorMsg ? (
+          <Text fontSize={16} color="red.600">
+            Hey! It is not your turn!
+          </Text>
+        ) : (
+          ""
+        )}
+      </Box>
       <FlatList
         numColumns={8}
         data={data}
@@ -107,7 +123,6 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
             >
               {renderPiece(index)}
 
-              {/* {renderPiece(item)} */}
             </Box>
           </TouchableOpacity>
         )}
