@@ -1,6 +1,6 @@
 import Chessboard from "./components/Chessboard";
 import { NativeBaseProvider, View, Text } from "native-base";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Index() {
   const [currentPlayer, setCurrentPlayer] = useState("white");
@@ -13,8 +13,12 @@ export default function Index() {
         flex={1}
         paddingY={"20%"}
       >
-        <Text fontSize={20} fontWeight={600} pb={5}>
-          It is currently player {currentPlayer}'s turn!
+        <Text pb={3} fontSize={16}>
+          Welcome to Nat's chess game!
+        </Text>
+        <Text fontSize={22} fontWeight={400} pb={5}>
+          It is currently player
+          <Text fontWeight={600}> {currentPlayer}'s</Text> turn!
         </Text>
 
         <View alignItems="center" justifyContent="center">

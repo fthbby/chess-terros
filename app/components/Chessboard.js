@@ -71,40 +71,57 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
   };
 
   const handleMovePawn = (index) => {
-    console.log("index:", index);
-
     const piece = board[index];
-    console.log("piece:", piece);
 
-    if (piece && piece.piece === "Pawn" && piece.color === currentPlayer) {
-      const direction = piece.color === "black" ? 8 : -8;
-      const targetIndex = index + direction;
+    if (piece && piece.color === currentPlayer) {
+      if (piece.piece === "Pawn") {
+        const direction = piece.color === "black" ? 8 : -8;
+        const targetIndex = index + direction;
 
-      console.log("targetIndex :", targetIndex);
-      if (targetIndex >= 0 && targetIndex < 64 && !board[targetIndex]) {
-        const newBoard = [...board];
-        newBoard[targetIndex] = { piece: "Pawn", color: piece.color };
-        newBoard[index] = null;
-        setBoard(newBoard);
+        if (targetIndex >= 0 && targetIndex < 64 && !board[targetIndex]) {
+          const newBoard = [...board];
+          newBoard[targetIndex] = { piece: "Pawn", color: piece.color };
+          newBoard[index] = null;
+          setBoard(newBoard);
 
-        setCurrentPlayer(currentPlayer === "white" ? "black" : "white");
+          setCurrentPlayer(currentPlayer === "white" ? "black" : "white");
+          setErrorMsg(false);
+          return;
+        }
+      } else if (piece.piece === "King") {
+        const direction = piece.color === "black" ? 8 : -8;
+        const targetIndex = index + direction;
+
+        if (targetIndex >= 0 && targetIndex < 64 && !board[targetIndex]) {
+          const newBoard = [...board];
+          newBoard[targetIndex] = { piece: "King", color: piece.color };
+          newBoard[index] = null;
+          setBoard(newBoard);
+
+          setCurrentPlayer(currentPlayer === "white" ? "black" : "white");
+          setErrorMsg(false);
+          return;
+        }
+      } else {
+        setErrorMsg("Sorry! This piece is still under construction ;)");
+        return;
       }
-      setErrorMsg(false);
     } else if (piece) {
-      setErrorMsg(true);
-      console.log("NOT UR TURN");
+      setErrorMsg("Hey! It's not your turn!");
+      return;
     }
+
+    setErrorMsg(false);
   };
+
   return (
     <Box alignItems={"center"} justifyContent={"center"}>
       <Box height={20}>
         {errorMsg ? (
           <Text fontSize={16} color="red.600">
-            Hey! It is not your turn!
+            {errorMsg}
           </Text>
-        ) : (
-          ""
-        )}
+        ) : null}
       </Box>
       <FlatList
         numColumns={8}
@@ -121,7 +138,6 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
               justifyContent={"center"}
             >
               {renderPiece(index)}
-
             </Box>
           </TouchableOpacity>
         )}
