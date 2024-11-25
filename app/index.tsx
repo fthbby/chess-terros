@@ -27,9 +27,9 @@ export default function Index() {
           <Text fontSize={20} fontWeight={600} pb={5}>Current User: {player}</Text>
           <View alignItems="center" justifyContent="center">
 
-          <TouchableOpacity onPress={switchUser}>
+          {/* <TouchableOpacity onPress={switchUser}> */}
             <Chessboard player={player}/>
-          </TouchableOpacity>
+          {/* </TouchableOpacity> */}
           </View>
         </View>
       </NativeBaseProvider>

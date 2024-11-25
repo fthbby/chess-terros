@@ -60,6 +60,7 @@ function Chessboard({ player }) {
             {renderPiece(item)}
           </Box>
         )}
+        scrollEnabled={false}
       />
     </Box>
   );
