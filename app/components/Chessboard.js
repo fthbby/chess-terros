@@ -1,9 +1,11 @@
 import React from "react";
-import { Box, FlatList } from "native-base";
+import { Box, FlatList, Text } from "native-base";
 import Tower from "../components/Pieces/Tower";
 import Pawn from "../components/Pieces/Pawn";
 import Horses from "../components/Pieces/Horses";
 import Bishop from "../components/Pieces/Bishop";
+import Queen from "../components/Pieces/Queen";
+import King from "../components/Pieces/King";
 
 function Chessboard({ player }) {
   const data = [];
@@ -30,6 +32,14 @@ function Chessboard({ player }) {
     if (index === 2 || index === 5 || index === 58 || index === 61) {
       return <Bishop color={index < 32 ? "black" : "white"} />;
     }
+
+    if (index === 3 || index === 59) {
+      return <Queen color={index < 32 ? "black" : "white"} />;
+    }
+
+    if (index === 4 || index === 60) {
+      return <King color={index < 32 ? "black" : "white"} />;
+    }
     return null;
   };
 
@@ -38,7 +48,8 @@ function Chessboard({ player }) {
       <FlatList
         numColumns={8}
         data={data}
-        renderItem={({ item }) => (
+        keyExtractor={(item) => item.toString()}
+        renderItem={({ item, index }) => (
           <Box
             backgroundColor={color(item)}
             width={10}
