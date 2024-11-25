@@ -92,7 +92,6 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
       setErrorMsg(false);
     } else if (piece) {
       setErrorMsg(true);
-
       console.log("NOT UR TURN");
     }
   };
