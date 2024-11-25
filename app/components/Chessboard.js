@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Text, FlatList } from "native-base";
-
+import Tower from "../components/Pieces/Tower";
 import Pawn from "../components/Pieces/Pawn";
 
 function Chessboard({ player }) {
@@ -16,6 +16,10 @@ function Chessboard({ player }) {
     const row = Math.floor(index / 8);
     if (row === 1) return <Pawn color="black" />;
     if (row === 6) return <Pawn color="white" />;
+
+    if (index === 0 || index === 7 || index === 56 || index === 63) {
+      return <Tower color={index < 32 ? "black" : "white"} />;
+    }
     return null;
   };
 
