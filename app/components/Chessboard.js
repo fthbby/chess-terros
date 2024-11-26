@@ -99,10 +99,26 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
           newBoard[selected] = null;
           setBoard(newBoard);
           setCurrentPlayer(currentPlayer === "white" ? "black" : "white");
-
           reset();
           return;
         }
+
+        const diagonalLeft = selected + direction - 1
+        const diagonalRight = selected + direction + 1
+
+        const leftLegal = index === diagonalLeft && board[index] && board[index].color !== selectedPiece.color
+        const rightLegal = index === diagonalRight && board[index]&& board[index].color !== selectedPiece.color
+
+        if (leftLegal || rightLegal){
+          const newBoard = [...board];
+          newBoard[index] = selectedPiece;
+          newBoard[selected] = null;
+          setBoard(newBoard);
+          setCurrentPlayer(currentPlayer === "white" ? "black" : "white");
+          reset();
+          return;
+        }
+
         setErrorMsg("Invalid move!");
         return;
       }
@@ -333,7 +349,8 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
   const resetApp = () => {
     setWinner(null);
     setCurrentPlayer("white");
-    reset();
+    setSelected(null);
+    setErrorMsg(false);
     DevSettings.reload();
   };
 
@@ -367,6 +384,23 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
         )}
         scrollEnabled={false}
       />
+
+      <TouchableOpacity onPress={reset}>
+        <View
+          mb={5}
+          paddingX={4}
+          background="#172F44"
+          height={10}
+          borderRadius={5}
+          alignItems={"center"}
+          justifyContent={"center"}
+          display={selected ? "block" : "none"}
+        >
+          <Text color="#FCBB00" fontWeight={600}>
+            Deselect
+          </Text>
+        </View>
+      </TouchableOpacity>
       <Text>
         Currently Selected Piece:{" "}
         {selected !== null
@@ -375,20 +409,7 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
             }`
           : "None"}
       </Text>
-      <TouchableOpacity onPress={reset}>
-        <View
-          paddingX={4}
-          background="#172F44"
-          height={10}
-          borderRadius={5}
-          alignItems={"center"}
-          justifyContent={"center"}
-        >
-          <Text color="#FCBB00" fontWeight={600}>
-            Deselect
-          </Text>
-        </View>
-      </TouchableOpacity>
+
       <AlertModal
         open={open}
         setOpen={setOpen}
