@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, FlatList, Text, Button } from "native-base";
+import { Box, FlatList, Text, View } from "native-base";
 import Tower from "../components/Pieces/Tower";
 import Pawn from "../components/Pieces/Pawn";
 import Horses from "../components/Pieces/Horses";
@@ -339,8 +339,6 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
 
   return (
     <Box alignItems={"center"} justifyContent={"center"}>
-      selected:
-      {selected}
       <Box height={20}>
         {errorMsg ? (
           <Text fontSize={16} color="red.600">
@@ -356,8 +354,7 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
           <TouchableOpacity>
             <Box
               onTouchEnd={() => handleMovePiece(index)}
-              // backgroundColor={color(index)}
-            backgroundColor={index === selected ? 'red.500' : color(index)}
+              backgroundColor={index === selected ? "red.500" : color(index)}
               width={10}
               height={10}
               alignItems={"center"}
@@ -370,8 +367,27 @@ function Chessboard({ currentPlayer, setCurrentPlayer }) {
         )}
         scrollEnabled={false}
       />
+      <Text>
+        Currently Selected Piece:{" "}
+        {selected !== null
+          ? `${board[selected]?.color || "None"} ${
+              board[selected]?.piece || "Empty"
+            }`
+          : "None"}
+      </Text>
       <TouchableOpacity onPress={reset}>
-        <Text>Click to deselect</Text>
+        <View
+          paddingX={4}
+          background="#172F44"
+          height={10}
+          borderRadius={5}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
+          <Text color="#FCBB00" fontWeight={600}>
+            Deselect
+          </Text>
+        </View>
       </TouchableOpacity>
       <AlertModal
         open={open}
